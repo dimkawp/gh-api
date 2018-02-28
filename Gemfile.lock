@@ -73,6 +73,10 @@ GEM
     crass (1.0.3)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
+    dotenv (2.2.1)
+    dotenv-rails (2.2.1)
+      dotenv (= 2.2.1)
+      railties (>= 3.2, < 5.2)
     equalizer (0.0.11)
     erubi (1.7.0)
     execjs (2.7.0)
@@ -88,12 +92,6 @@ GEM
       rack (>= 1.3.0)
       rack-accept
       virtus (>= 1.0.0)
-    grape-jbuilder (0.2.0)
-      grape (>= 0.3)
-      i18n
-      jbuilder
-      tilt
-      tilt-jbuilder (>= 0.4.0)
     grape-swagger (0.28.0)
       grape (>= 0.16.2)
     grape-swagger-rails (0.3.0)
@@ -208,9 +206,6 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    tilt-jbuilder (0.7.1)
-      jbuilder
-      tilt (>= 1.3.0, < 3)
     turbolinks (5.1.0)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
@@ -241,9 +236,9 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  dotenv-rails
   faker
   grape
-  grape-jbuilder
   grape-swagger
   grape-swagger-rails
   jbuilder (~> 2.5)
