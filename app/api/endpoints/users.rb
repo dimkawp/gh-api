@@ -29,14 +29,15 @@ module Endpoints
         requires :password, type: String, desc: 'User PASSWORD'
       end
       post 'authentication', jbuilder: 'authentication' do
-        if User.find_by(name: params[:name], password: params[:password])
+        if user = User.find_by(name: params[:name], password: params[:password])
           if user.role === 'admin'
-            {login: 'true', admin: 'true'}
+            result = true
           else
-            {login: 'true', admin: 'false'}
+            result = false
           end
+          {login: 'true', admin: result }
         else
-          {login: 'false', admin: 'false'}
+          {login: 'false'}
         end
       end
     end
