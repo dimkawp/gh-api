@@ -4,7 +4,10 @@ module Endpoints
       # get user fragments
 
       get 'user', jbuilder: 'fragments' do
-        p 'test Endpoint user request'
+        payload = { data: 'test' }
+        token = JWT.encode payload, nil, 'none'
+        decoded_token = JWT.decode token, nil, false
+        p [token,decoded_token]
       end
       #created new user
       params do
@@ -30,15 +33,28 @@ module Endpoints
       end
       post 'authentication', jbuilder: 'authentication' do
         if user = User.find_by(name: params[:name], password: params[:password])
+          token = JWT.encode user.email, nil, 'none'
           if user.role === 'admin'
             result = true
           else
             result = false
           end
-          {login: 'true', admin: result }
+          {login: 'true', admin: result, token: token}
         else
           {login: 'false'}
         end
+      end
+      #testWorker
+      params do
+        requires :token, type: String, desc: 'User TOKEN'
+      end
+      post 'token', jbuilder: 'token' do
+        decoded_token = JWT.decode params[:token], nil, false
+          if user = User.find_by(email: decoded_token.first)
+          {name: user.name,email: user.email, role: user.role}
+          else
+          {error: 'failed token'}
+          end
       end
     end
   end

@@ -46,6 +46,9 @@ gem 'jbuilder', '~> 2.5'
   gem 'grape-swagger'
   gem 'grape-swagger-rails'
   gem 'rack-cors'
+  #Auth
+  gem 'bcrypt'
+  gem 'jwt'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
