@@ -4,7 +4,23 @@ module Api
   class API < Grape::API
     format :json
 
+    helpers do
+      def authenticate
+        error!('Unauthorized. Invalid or expired token.', 401) unless current_user
+      end
+
+      def current_user
+        token = ApiKey.where(access_token: params[:token]).first
+        if token && !token.expired?
+          @current_user = User.find(token.user_id)
+        else
+          false
+        end
+      end
+    end
+
     mount Endpoints::Users
+    mount Endpoints::ApiKeys
 
     add_swagger_documentation hide_documentation_path: true,
                               api_version: 'v1',

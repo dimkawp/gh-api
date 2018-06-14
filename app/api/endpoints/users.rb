@@ -26,6 +26,7 @@ module Endpoints
         end
       end
 
+
       #authentication
       params do
         requires :name, type: String, desc: 'User NAME'
@@ -43,6 +44,20 @@ module Endpoints
         else
           {login: 'false'}
         end
+      end
+
+      #message
+      params do
+        requires :name, type: String, desc: 'Name'
+        requires :mail, type: String, desc: 'Mail'
+        requires :text, type: String, desc: 'Text'
+      end
+      post 'message', jbuilder: 'message' do
+        name = params[:name]
+        mail = params[:mail]
+        text = params[:text]
+        MessageMailer.new_message(name,mail,text).deliver
+
       end
       #testWorker
       params do
