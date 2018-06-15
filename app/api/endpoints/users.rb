@@ -56,10 +56,10 @@ module Endpoints
         name = params[:name]
         mail = params[:mail]
         text = params[:text]
-        if message = MessageMailer.new_message(name,mail,text).deliver
+        if MessageMailer.new_message(name,mail,text).deliver
           {message: 'Message Write'}
         else
-          message.error
+          {message: 'Server Error'}
         end
 
       end
