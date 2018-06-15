@@ -56,7 +56,11 @@ module Endpoints
         name = params[:name]
         mail = params[:mail]
         text = params[:text]
-        MessageMailer.new_message(name,mail,text).deliver
+        if MessageMailer.new_message(name,mail,text).deliver
+          {message: 'Message Write'}
+        else
+          $ERROR_INFO
+        end
 
       end
       #testWorker
