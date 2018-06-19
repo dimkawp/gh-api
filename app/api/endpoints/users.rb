@@ -63,6 +63,19 @@ module Endpoints
         end
 
       end
+
+      #resume on email
+      params do
+        requires :mail, type: String, desc: 'Mail'
+      end
+      post 'resume_on_mail', jbuilder: 'resume_on_mail' do
+        mail = params[:mail]
+        if ResumeMailer.new_mail(mail).deliver
+          {message: "Resume go to #{mail}"}
+        else
+          {message: 'Error'}
+        end
+      end
       #testWorker
       params do
         requires :token, type: String, desc: 'User TOKEN'
