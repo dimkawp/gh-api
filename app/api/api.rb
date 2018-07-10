@@ -22,6 +22,7 @@ module Api
     mount Endpoints::Users
     mount Endpoints::ApiKeys
     mount Endpoints::Projects
+    mount Endpoints::Wok
 
     add_swagger_documentation hide_documentation_path: true,
                               api_version: 'v1',
