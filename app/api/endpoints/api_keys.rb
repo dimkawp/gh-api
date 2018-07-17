@@ -38,7 +38,7 @@ module Endpoints
       params do
         requires :token, type: String, desc: 'Access token.'
       end
-      get :token do
+      post :token do
         authenticate
         {object: current_user}
       end
